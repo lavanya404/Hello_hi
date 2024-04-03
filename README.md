@@ -32,3 +32,23 @@ search_results_dropdown = WebDriverWait(driver, 10).until(EC.visibility_of_eleme
 # Click on the iPhone 12 or iPhone 13 from the dropdown
 iphone_12_or_13 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='v1tKd-']//a[contains(text(), 'iPhone 12') or contains(text(), 'iPhone 13')]")))
 iphone_12_or_13.click()
+
+-------------------------------------------
+# Enter "iphone" in the search field
+search_field.send_keys("iphone")
+
+# Press Enter to perform the search
+search_field.send_keys(Keys.RETURN)
+
+# Wait for the search results dropdown to appear
+search_results_dropdown = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "vh79eN")))
+
+# Find all the links in the dropdown
+links = search_results_dropdown.find_elements(By.XPATH, "//a[@class='VZ-Dzg']")
+
+# Loop through the links and click on the one containing 'iPhone 12' or 'iPhone 13'
+for link in links:
+    if 'iPhone 12' in link.text or 'iPhone 13' in link.text:
+        link.click()
+        break  # Once clicked, exit the loop
+M
