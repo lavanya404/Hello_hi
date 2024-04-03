@@ -57,3 +57,47 @@ for link in links:
 # 1.Navigate to URL https://www.flipkart.com/ (Ignore the login pops up)
 # 2.Click on the search field and enter iPhone
 # 3.Click on the iPhone 12 or iPhone 13 from the dropdown
+--------------------------------------------------------------------------------------------
+# Close the login pop-up if it appears (if you don't need to interact with it)
+try:
+    close_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_2KpZ6l _2doB4z']")))
+    close_button.click()
+except:
+    pass
+
+# Find the search field and enter "iPhone"
+search_field = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "q")))
+search_field.click()
+search_field.send_keys("iPhone")
+
+# Wait for the search results dropdown to appear
+search_results_dropdown = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "vh79eN")))
+
+# Find all the links in the dropdown
+links = search_results_dropdown.find_elements(By.XPATH, "//a[@class='VZ-Dzg']")
+
+# Loop through the links and click on the one containing 'iPhone 12' or 'iPhone 13'
+for link in links:
+    if 'iPhone 12' in link.text or 'iPhone 13' in link.text:
+        link.click()
+        break  
+
+--------------------------------------------------------------------------
+# Find the search field and enter "iPhone"
+search_field = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "q")))
+search_field.click()
+search_field.send_keys("iPhone")
+time.sleep(2)  # Adding a short delay to let the dropdown load
+
+# Send arrow keys to navigate the dropdown
+search_field.send_keys(Keys.ARROW_DOWN)
+search_field.send_keys(Keys.ENTER)
+------------------------------------------------------------------
+# Find iPhone 12 or iPhone 13 from the dropdown
+iphone_options = WebDriverWait(search_results_dropdown, 10).until(EC.presence_of_all_elements_located((By.XPATH, "//div[contains(@class,'vh79eN')]//a[contains(@class,'_1fQZEK')]")))
+
+# Loop through each option and click on iPhone 12 or iPhone 13
+for option in iphone_options:
+    if "iPhone 12" in option.text or "iPhone 13" in option.text:
+        option.click()
+        break
