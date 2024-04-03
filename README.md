@@ -51,4 +51,9 @@ for link in links:
     if 'iPhone 12' in link.text or 'iPhone 13' in link.text:
         link.click()
         break  # Once clicked, exit the loop
-M
+--------------------------------------------------------------------------------------
+#  Assessment 5: Handling dynamic drop down:
+
+# 1.Navigate to URL https://www.flipkart.com/ (Ignore the login pops up)
+# 2.Click on the search field and enter iPhone
+# 3.Click on the iPhone 12 or iPhone 13 from the dropdown
